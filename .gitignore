@@ -1,8 +1,9 @@
-venv/
+workshop2/venv/
 
 
-__pycache__/
 
-csv/spotify_dataset.csv:Zone.Identifier
+workshop2/__pycache__/
 
-csv/the_grammy_awards.csv:Zone.Identifier
+workshop2/csv/spotify_dataset.csv:Zone.Identifier
+
+workshop2/csv/the_grammy_awards.csv:Zone.Identifier
