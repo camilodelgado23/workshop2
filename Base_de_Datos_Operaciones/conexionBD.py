@@ -19,7 +19,7 @@ def create_connection():
             host=credentials.DB_HOST,
             user=credentials.DB_USER,
             password=credentials.DB_PASSWORD,
-            database=credentials.DB_NAME
+            database=credentials.DB_NAME,
         )
         if connection.is_connected():
             print('Conexion con la Base de Datos MySQL Lograda.')
