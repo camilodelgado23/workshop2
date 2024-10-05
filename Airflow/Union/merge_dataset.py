@@ -54,10 +54,8 @@ def unir_datasets(spotify_df, grammys_df):
     # Eliminar columnas innecesarias de Grammys
     grammys_df = grammys_df.drop(columns=['published_at', 'updated_at', 'workers', 'img'], errors='ignore')
 
-    # Asegurarte de que los nombres de las columnas coincidan
     grammys_df.rename(columns={'title': 'track_name', 'artist': 'artists'}, inplace=True)
 
-    # Unir los datasets
     merged_df = pd.merge(spotify_df, grammys_df, on=['track_name', 'artists'], how='left')
 
     return merged_df
@@ -70,21 +68,13 @@ def exportar_a_csv(dataframe, nombre_archivo):
 
 # Función principal
 def main():
-    # Crear conexión a la base de datos
-    connection = create_connection()  # Asegúrate de que esta función esté definida correctamente
-
-    # Seleccionar datos
+    connection = create_connection()  
     spotify_df = seleccionar_spotify(connection, 'Spotify')
     grammys_df = seleccionar_grammys(connection, 'Grammys')
 
     if spotify_df is not None and grammys_df is not None:
-        # Unir datasets
         merged_df = unir_datasets(spotify_df, grammys_df)
-
-        # Exportar el resultado a CSV
         exportar_a_csv(merged_df, 'mergedg_dataset.csv')
-
-    # Cerrar la conexión
     connection.close()
 
 if __name__ == '__main__':

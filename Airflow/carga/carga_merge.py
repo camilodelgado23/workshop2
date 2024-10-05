@@ -1,5 +1,4 @@
 import pandas as pd
-import numpy as np
 import sys
 import os
 
@@ -41,11 +40,10 @@ def load_merge_csv(file_path):
         'winner': False
     })
     
-    # Asegurarse de que 'explicit' sea booleano
     Dataset_merge['explicit'] = Dataset_merge['explicit'].astype(bool)
 
     print("Dataset procesado exitosamente.")
-    print(Dataset_merge.head())  # Verificar los datos procesados
+    print(Dataset_merge.head())  
     return Dataset_merge
 
 # Función para crear la tabla de Spotify
@@ -100,7 +98,6 @@ def insert_merge_data(connection, Dataset_merge):
     ) VALUES (%s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s)
     """
     
-    # Especificar las columnas a insertar (sin 'id')
     selected_columns = [
         'track_id', 'artists', 'album_name', 'track_name', 
         'popularity', 'duration_ms', 'explicit', 
@@ -111,7 +108,6 @@ def insert_merge_data(connection, Dataset_merge):
         'category', 'nominee', 'winner'
     ]
     
-    # Filtra el DataFrame para que solo contenga las columnas necesarias
     data = Dataset_merge[selected_columns].values.tolist()
     
     print(f"Número de filas a insertar: {len(data)}")
@@ -120,7 +116,7 @@ def insert_merge_data(connection, Dataset_merge):
     try:
         cursor = connection.cursor()
         for record in data:
-            if len(record) != 21:  # Verifica que la longitud sea 21
+            if len(record) != 21:  
                 print(f"Error: El registro tiene {len(record)} elementos, se esperaban 21. Registro: {record}")
                 continue
             
@@ -148,4 +144,4 @@ def main(file_path):
         print("Error: No se pudo establecer la conexión con la base de datos.")
 
 if __name__ == "__main__":
-    main('workshop2/csv/mergedg_dataset.csv')  # Cambia a la ruta de tu archivo CSV
+    main('workshop2/csv/mergedg_dataset.csv')  

@@ -1,8 +1,13 @@
-# workshop2:file_folder:
+# workshop2: file_folder:
 
 ## Por: Camilo Jose Delgado Bolaños - 2225337 
 
-En este workshop se recibió un dataset con candidatos a la espera de ser contratados. Dichos datos fueron migrados a una base de datos relacional (MySQL), se les realizó un E.D.A. con el objetivo de entender y comprender el contenido de los mismos, y se realizaron modificaciones en base a ello. Finalmente, se desarrollaron visualizaciones de datos sobre el contenido del dataset
+En este workshop En este taller utilizaremos el conjunto de datos de Spotify para leerlo en Python y Airflow, crear algunas transformaciones y cargarlo en una base de datos. Por otro lado, utilizaremos el conjunto de datos de los Grammy para cargarlo en una base de datos y luego, utilizando Airflow, leeremos los datos desde la base de datos, realizaremos algunas transformaciones, los fusionaremos con los conjuntos de datos de Spotify y la API, y los cargaremos en la base de datos.
+
+Los dataset que se usaron fueron los siguientes:
+-  spotify extraido de la siguiente pagina donde puede obtener informacion del contenido del dataset: https://www.kaggle.com/datasets/maharshipandya/-spotify-tracks-dataset
+
+- Grammys extraido de la siguiente pagina donde puede obtener informacion del contenido del dataset: https://www.kaggle.com/datasets/unanimad/grammy-awards
 
 ## Herramientas Usadas :wrench:
 
@@ -11,10 +16,9 @@ En este workshop se recibió un dataset con candidatos a la espera de ser contra
     - Visual Studio Code (VS Code): Como entorno para escribir y ejecutar código Python.
     - Jupyter Notebook: Para desarrollo interactivo de código, exploración de datos, y ejecución de scripts.
     - Virtual Environment (venv): Para gestionar dependencias y aislar el entorno de desarrollo.
-
-- MySQL:
-    - MySQL Workbench: Para gestión y administración de bases de datos MySQL.
-
+- WSL Ubuntu: para ejecutar un entorno de Linux directamente en mi máquina con Windows, facilitando la compatibilidad con herramientas y librerías de Linux.
+- MySQL: Para gestión y administración de bases de datos MySQL.
+- Airflow: Como herramienta poderosa para la automatización y orquestación de flujos de trabajo
 - Git: Para control de versiones y seguimiento de cambios en el proyecto.
 - GitHub: Para alojar el repositorio del proyecto, gestionar el control de versiones, y colaborar en el desarrollo del proyecto.
 - Power BI: Para la visualizacion de Datos.
@@ -23,22 +27,32 @@ En este workshop se recibió un dataset con candidatos a la espera de ser contra
 
 La estructura del repositorio es la siguiente:
 
-- **Análisis_de_Datos:** Carpeta Donde tendremos los archivos donde se realizaran el análisis del dataset y sacaremos el dataset transformado con el que se realizaran las visualizaciones de datos.
-    - **candidates_analisis.ipynb:** En este notebook se lleva acabo el E.D.A del dataset de candidates original para ver que tanto tiene el dataset y poder sacar diversas conclusiones y modificaciones.
-    - **candidates_transformado.ipynb:** En este notebook filtraremos el dataset original donde solo dejaremos la información de los empleados contratados, y donde además agregaremos una nueva columna de ID para poder identificar a cada uno de los candidatos con mayor facilidad.
-- **Base_de_Datos_Operaciones:** En esta carpeta tendremos las operaciones que realizamos en nuestra Base de Datos en este caso MySQL, como lo es realizar la conexión a la BD, y la creación de las tablas donde insertaremos nuestro dataset.
-    - **_init_.py:** Se utiliza para convertir un directorio en un paquete de Python. Esto permite que el contenido del directorio, como otros módulos y subpaquetes, pueda ser importado y utilizado en otros scripts o proyectos.
-    - **carga_dataset_BD.ipynb:** En este notebook insertamos los 2 dataset tanto el original como el transformado y los insertamos en las tablas ubicadas en la Base de Datos.
-    - **conexionBD.py:** En este archivo tenemos el script que con ayuda de la libreria MySQL connection nos conectamos a la Base de Datos de MySQL.
-    - **tablasBD.ipynb:** En este notebook creamos las tablas donde crearemos las tablas de los 2 dataset en la Base de Datos, el original y el transformado.
-- **csv:** Carpeta donde almacenaremos nuestros archivos .csv .
-    - **candidates_contratados.csv:** Dataset transformado con solo los candidatos contratados y con una columna extra de ID que facilita la identificación de los candidatos.
-    - **candidates.csv:** Dataset original de las solicitudes de los candidatos.
-- **.gitignore:** Archivo en donde colocamos los archivos que no queremos que se suban a nuestro repositorio de git hub como lo es nuestro entorno virtual o nuestro archivo en donde almacenamos las credenciales.
-- **readme.txt:** Archivo donde colocaremos una breve descripción de nuestro proyecto y donde se explica como ejecutar el workshop.
-- **requirements.txt:** Archivo en donde colocamos las librerías/bibliotecas que usamos en nuestro entorno para el desarrollo del
-workshop.
-- **Dashboard.pdf**: Archivo PDF en donde se muestran las visualizaciones de los datos realizadas en PowerBI.
+**Airflow**: Este directorio contiene todo lo relacionado con Apache Airflow
+
+  **Dags:** Contiene los archivos que definen los DAGs (Directed Acyclic Graphs) de Airflow.
+    **data_pipeline_spotify_grammy.py:** Archivo Python que define el pipeline de datos para procesar y analizar los datasets de Spotify y Grammys.
+
+  **Union:** Este directorio maneja la lógica de unión de los datasets.
+    **merge_dataset.py:** Archivo Python que contiene funciones para unir los datasets de Spotify y Grammys.
+
+  **carga:** Este directorio contiene scripts para cargar datos en la base de datos y otros servicios.
+    **carga_Spotify.py:** Archivo que gestiona la carga del dataset de Spotify en la base de datos.
+    **carga_merge.py:** Archivo que se encarga de cargar el dataset combinado en la base de datos.
+    **subir_drive.py:** Archivo que contiene la lógica para subir archivos a Google Drive.
+
+**Analisis_de_Datos:** Este directorio contiene notebooks de Jupyter para análisis de datos.
+  **E.D.A_Grammys.ipynb:** Notebook que realiza un análisis exploratorio de datos (EDA) sobre el dataset de los Grammys.
+  **E.D.A_Spotify.ipynb:** Notebook que realiza un análisis exploratorio de datos (EDA) sobre el dataset de Spotify. 
+
+**Base_de_Datos_Operaciones:** Este directorio contiene scripts y notebooks relacionados con la gestión y operación de la base de datos.
+  **__init__.py:** Indica que este directorio debe ser tratado como un paquete Python.
+  **carga_dataset_BD.ipynb:** Notebook que  contiene la lógica para cargar el dataset de Grammys a la base de datos.
+  **conexionBD.py:** Archivo que contiene la lógica para conectarse a la base de datos.
+  **tablasBD.ipynb:** Notebook que podría describir las tablas en la base de datos o cómo trabajar con ellas.
+
+**Dashboard.pdf:** Archivo PDF que contiene el dashboard.
+**README.md:** Archivo que proporciona una descripción del proyecto, instrucciones de instalación, uso y otros detalles relevantes.
+**requirements.txt:** Archivo que lista las dependencias del proyecto y sus versiones, que pueden ser instaladas mediante pip.
 
 ## Instrucciones para la ejecucion :bookmark_tabs:
 
@@ -47,17 +61,18 @@ workshop.
 - Python: https://www.python.org/downloads/
 - MySQL: https://dev.mysql.com/downloads/mysql/
 - PowerBI: https://www.microsoft.com/es-es/download/details.aspx?id=58494
-- MySQL Workbench(Opcional): https://dev.mysql.com/downloads/workbench/
+- MySQL : https://dev.mysql.com/downloads/workbench/
+- WSL: https://learn.microsoft.com/es-es/windows/wsl/install
 
 Clonamos el repositorio en nuestro entorno 
 
 ```bash
-  git clone https://github.com/camilodelgado23/workshop__1.git
+  git clone https://github.com/camilodelgado23/workshop2.git
 ```
 Vamos al repositorio clonado 
 
 ```bash
-  cd workshop1
+  cd workshop2
 ```
 ##### Si desea puede usar un entorno virtual para gestionar dependencias de manera aislada  
 
@@ -69,7 +84,7 @@ Instalamos el entrono virtual
 Iniciamos el entorno 
 
 ```bash
-  .\venv\Scripts\Activate
+  source venv/bin/activate
 ```
 Instalamos las librerias necesarias almacenadas en el archivo requirements.txt
 
@@ -79,7 +94,7 @@ Instalamos las librerias necesarias almacenadas en el archivo requirements.txt
 Creamos la Base de Datos en MySQL 
 
 ```bash
-  CREATE SCHEMA workshop1;
+  CREATE SCHEMA workshop2;
 ```
 Creamos el archivo credentials.py donde almacenaremos las credenciales para conectarnos a la Base de Datos, puede seguir la siguiente estructura para ese archivo:
 
@@ -89,13 +104,24 @@ Creamos el archivo credentials.py donde almacenaremos las credenciales para cone
   DB_PASSWORD = 'tu_contraseña'
   DB_NAME = 'tu_Base_Datos'
 ```
-Podemos probar si las credenciales son correctas ejecutando nuestro archivo conexion.py.
+Podemos probar si las credenciales son correctas ejecutando nuestro archivo conexionBD.py.
+
+Para la parte de airflow debemos escalarlo: 
+
+```bash
+  airflow standalone
+```
+una vez adentro iniciamos nos dirigimos a p://localhost:8080 e iniciamos secion con el usuario y contraseña que nos aparece en las líneas de código, y en la seccion de Dags buscamos el dag con el pipline del workshop
+
+![Texto alternativo](https://imagenes.notion.site/image/https%3A%2F%2Fprod-files-secure.s3.us-west-2.amazonaws.com%2Fb687bcac-6636-49ac-8ce3-1adf66aa571c%2F6eda33ee-063f-4572-97fc-55839169da94%2Fimage.png?table=block&id=11638733-ed67-806a-8729-c568be1e1c07&spaceId=b687bcac-6636-49ac-8ce3-1adf66aa571c&width=1420&userId=&cache=v2)
 
 #### Para una correcta ejecucuion: 
 
-Para una correcta ejecucion de nuestro repositorio ejecutamos primero nuestro notebook tablasBD, donde crearemos las tablas en la base de datos. Despues ejecutamos el notebook carga_dataset_BD donde cargamos los 2 datasets a las tablas ya creadas en la BD. 
+Para una correcta ejecucion de nuestro repositorio ejecutamos primero nuestro notebook tablasBD, donde crearemos la tabla para el dataset de los grammys en la base de datos. Despues ejecutamos el notebook carga_dataset_BD donde cargamos el dataset de los grammys a la bd.
 
-Podemos ejecutar los otros 2 notebooks que son candidates_analisis, y candidates_transformado, en donde realizamos el E.D.A del dataset original y el proceso de filtracion para exportar el dataset candidates_contratados.csv 
+Podemos ejecutar los otros 2 notebooks que son E.D.A_Spotify, y E.D.A_Grammys, en donde realizamos un analisis para comprender mejor el contenido del dataset.
+
+Luego se puede ejecutar el dag y ver su proceso en airflow
 
 #### Conexion a PowerBI 
 
