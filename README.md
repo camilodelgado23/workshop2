@@ -145,6 +145,4 @@ Seleccionamos Base de datos y Colocamos nuestro usuario y contraseña
 
 ![Texto alternativo](https://imagenes.notion.site/image/https%3A%2F%2Fprod-files-secure.s3.us-west-2.amazonaws.com%2Fb687bcac-6636-49ac-8ce3-1adf66aa571c%2Fe2ab8ccb-f840-4ec1-adc6-46b4174fe76c%2F3.png?table=block&id=3a0475da-07f1-40d6-a8aa-91010f552e16&spaceId=b687bcac-6636-49ac-8ce3-1adf66aa571c&width=1420&userId=&cache=v2)
 
-Finalmente seleccionamos las tablas que vamos a usar en este caso usaremos la de candidates_contratados 
-
-![Texto alternativo](https://imagenes.notion.site/image/https%3A%2F%2Fprod-files-secure.s3.us-west-2.amazonaws.com%2Fb687bcac-6636-49ac-8ce3-1adf66aa571c%2Fd8646e93-1d66-434c-b2eb-66216c016e56%2Fimage.png?table=block&id=feffc280-9bfc-4f48-83e2-14b289894e8b&spaceId=b687bcac-6636-49ac-8ce3-1adf66aa571c&width=1420&userId=&cache=v2)
+Finalmente seleccionamos las tablas que vamos a usar 
